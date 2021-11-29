@@ -6,7 +6,7 @@
 
 class Player : public Entity
 {
-  public:
+public:
     Player()
     {
         sprite = Sprite((u32 *)SprPlayerTiles, SprPlayerTilesLen, (u16 *)SprPlayerPal, SprPlayerPalLen);

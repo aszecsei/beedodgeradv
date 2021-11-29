@@ -12,14 +12,14 @@ enum class MemoryStatus : u8
 
 class SpriteManager
 {
-  private:
+private:
     static const int MEMORY_BLOCKS = 1024;
     MemoryStatus m_memoryStatus[MEMORY_BLOCKS];
     SpriteManager()
     {
     }
 
-  public:
+public:
     static SpriteManager &instance()
     {
         static SpriteManager INSTANCE;

@@ -5,10 +5,10 @@
 
 class Engine
 {
-  private:
+private:
     Scene *m_currentScene;
 
-  public:
+public:
     void init();
     void update();
     void draw();
