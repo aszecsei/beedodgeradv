@@ -21,3 +21,7 @@ void TiledScene::draw()
 {
     oam_copy(oam_mem, obj_buffer, OBJ_CNT);
 }
+
+void TiledScene::unload()
+{
+}

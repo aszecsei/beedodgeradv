@@ -4,36 +4,22 @@
 #include "sprite.h"
 #include "tiled_scene.h"
 
+#include "bee.h"
+#include "player.h"
+
 class GameScene : public TiledScene
 {
 private:
     SpriteData m_playerSpriteData;
     SpriteData m_beeSpriteData;
 
-    int m_x;
-    int m_y;
-    int m_vx;
-    int m_vy;
+    Player m_player;
 
-    int m_bx;
-    int m_by;
-    int m_bvx;
-    int m_bvy;
-    int m_brot;
-
-    void clamp_to_screen(int &x, int &y, bool &hitX, bool &hitY);
+    static const size_t BEE_CNT = 4;
+    Bee m_bees[BEE_CNT];
 
 public:
     GameScene()
-        : m_x(SCREEN_WIDTH / 2 - 8)
-        , m_y(SCREEN_HEIGHT / 2 - 8)
-        , m_vx(1)
-        , m_vy(1)
-        , m_bx(30)
-        , m_by(50)
-        , m_bvx(1)
-        , m_bvy(1)
-        , m_brot(90)
     {
     }
 

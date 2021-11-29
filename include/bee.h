@@ -1,10 +1,10 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef BEE_H
+#define BEE_H
 
 #include "sprite.h"
 #include <tonc.h>
 
-class Player
+class Bee
 {
 private:
     SpriteData *m_spriteData;
@@ -22,7 +22,7 @@ private:
     void clamp_to_screen(bool &hitX, bool &hitY);
 
 public:
-    Player()
+    Bee()
         : m_spriteData(nullptr)
         , m_pos({0, 0})
         , m_objData(nullptr)
@@ -40,4 +40,4 @@ public:
     void draw();
 };
 
-#endif // PLAYER_H
+#endif // BEE_H

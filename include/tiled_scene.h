@@ -20,6 +20,7 @@ public:
     void init() override;
     void update() override;
     void draw() override;
+    void unload() override;
 };
 
 #endif // TILED_SCENE_H

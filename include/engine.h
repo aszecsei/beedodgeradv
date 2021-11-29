@@ -1,12 +1,18 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include "game_scene.h"
 #include "scene.h"
+
+enum class SceneType
+{
+    GameScene,
+};
 
 class Engine
 {
 private:
-    Scene *m_currentScene;
+    Scene *m_currentScene = nullptr;
 
 public:
     void init();
