@@ -1,11 +1,12 @@
 #include "game_scene.h"
-#include "sprite_manager.h"
-#include "common.h"
+
 #include <tonc.h>
 
 #include "BgGame.h"
-#include "SprPlayer.h"
 #include "SprBee.h"
+#include "SprPlayer.h"
+#include "common.h"
+#include "sprite_manager.h"
 
 void GameScene::init()
 {
@@ -37,7 +38,8 @@ void GameScene::init()
     REG_BG0CNT = BG_CBB(0) | BG_SBB(30) | BG_8BPP | BG_REG_32x32;
 
     obj_set_attr(&obj_buffer[0], ATTR0_SQUARE | ATTR0_8BPP, ATTR1_SIZE_16, ATTR2_ID(playerTileId));
-    obj_set_attr(&obj_buffer[1], ATTR0_SQUARE | ATTR0_8BPP | ATTR0_AFF, ATTR1_SIZE_16 | ATTR1_AFF_ID(0), ATTR2_ID(beeTileId));
+    obj_set_attr(&obj_buffer[1], ATTR0_SQUARE | ATTR0_8BPP | ATTR0_AFF, ATTR1_SIZE_16 | ATTR1_AFF_ID(0),
+                 ATTR2_ID(beeTileId));
     obj_aff_identity(&obj_aff_buffer[0]);
 }
 

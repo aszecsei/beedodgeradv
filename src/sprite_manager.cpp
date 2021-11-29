@@ -1,6 +1,7 @@
 #include "sprite_manager.h"
-#include <tonc.h>
+
 #include <memory.h>
+#include <tonc.h>
 
 #define TILE_BASE (u8 *)&tile_mem[4]
 

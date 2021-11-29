@@ -5,20 +5,19 @@
 
 class Sprite
 {
-public:
-    u32 *TileData;
-    size_t TileDataSize;
+  public:
+    u32 *tile_data;
+    size_t tile_data_size;
 
     u16 *Palette;
-    size_t PaletteSize;
+    size_t palette_size;
 
     Sprite(u32 *tileData, size_t tileDataSize, u16 *palette, size_t paletteSize)
-        : TileData(tileData), TileDataSize(tileDataSize), Palette(palette), PaletteSize(paletteSize)
+        : tile_data(tileData), tile_data_size(tileDataSize), Palette(palette), palette_size(paletteSize)
     {
     }
 
-    Sprite()
-        : TileData(nullptr), TileDataSize(0), Palette(nullptr), PaletteSize(0)
+    Sprite() : tile_data(nullptr), tile_data_size(0), Palette(nullptr), palette_size(0)
     {
     }
 };

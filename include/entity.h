@@ -5,7 +5,7 @@
 
 class Entity
 {
-public:
+  public:
     Sprite sprite;
     POINT position;
 

@@ -3,13 +3,15 @@
 
 class Scene
 {
-public:
+  public:
     virtual void init() = 0;
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual void unload() = 0;
 
-    virtual ~Scene() {}
+    virtual ~Scene()
+    {
+    }
 };
 
 #endif // SCENE_H
