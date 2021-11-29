@@ -6,7 +6,7 @@
 class Entity
 {
 public:
-    Sprite sprite;
+    SpriteData sprite;
     POINT position;
 
     Entity()

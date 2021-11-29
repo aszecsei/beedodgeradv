@@ -1,11 +1,15 @@
 #ifndef GAME_SCENE_H
 #define GAME_SCENE_H
 
+#include "sprite.h"
 #include "tiled_scene.h"
 
 class GameScene : public TiledScene
 {
 private:
+    SpriteData m_playerSpriteData;
+    SpriteData m_beeSpriteData;
+
     int m_x;
     int m_y;
     int m_vx;

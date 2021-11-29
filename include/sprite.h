@@ -3,29 +3,42 @@
 
 #include <tonc.h>
 
-class Sprite
+class SpriteData
 {
+private:
+    const u32 *m_tileData = nullptr;
+    size_t m_tileDataSize = 0;
+
+    const u16 *m_palette = nullptr;
+    size_t m_paletteSize = 0;
+
+    int m_tileId = -1;
+    void *m_tileMemory = nullptr;
+
 public:
-    u32 *tile_data;
-    size_t tile_data_size;
-
-    u16 *Palette;
-    size_t palette_size;
-
-    Sprite(u32 *tileData, size_t tileDataSize, u16 *palette, size_t paletteSize)
-        : tile_data(tileData)
-        , tile_data_size(tileDataSize)
-        , Palette(palette)
-        , palette_size(paletteSize)
+    SpriteData(const u32 tileData[], size_t tileDataSize, const u16 palette[], size_t paletteSize)
+        : m_tileData(tileData)
+        , m_tileDataSize(tileDataSize)
+        , m_palette(palette)
+        , m_paletteSize(paletteSize)
     {
     }
 
-    Sprite()
-        : tile_data(nullptr)
-        , tile_data_size(0)
-        , Palette(nullptr)
-        , palette_size(0)
+    SpriteData()
     {
+    }
+
+    void load();
+    void unload();
+
+    inline const bool loaded()
+    {
+        return m_tileId >= 0;
+    }
+
+    inline const int tileId()
+    {
+        return m_tileId;
     }
 };
 

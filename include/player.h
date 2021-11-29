@@ -9,7 +9,7 @@ class Player : public Entity
 public:
     Player()
     {
-        sprite = Sprite((u32 *)SprPlayerTiles, SprPlayerTilesLen, (u16 *)SprPlayerPal, SprPlayerPalLen);
+        sprite = SpriteData((u32 *)SprPlayerTiles, SprPlayerTilesLen, (u16 *)SprPlayerPal, SprPlayerPalLen);
 
         pt_set(&position, SCREEN_WIDTH / 2 - 8);
     }

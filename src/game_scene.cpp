@@ -20,26 +20,17 @@ void GameScene::init()
     // Load map into SBB 30
     memcpy16(&se_mem[30], BgGameMap, BgGameMapLen / 2);
 
-    // PLAYER DATA
-    // Load Palette
-    memcpy16(pal_obj_mem, SprPlayerPal, SprPlayerPalLen / 2);
-    // Load tiles
-    int playerTileId;
-    void *playerTileMem = SpriteManager::instance().allocate(SprPlayerTilesLen, playerTileId);
-    memcpy32(playerTileMem, SprPlayerTiles, SprPlayerTilesLen / 4);
-
-    // BEE DATA
-    // Load tiles
-    int beeTileId;
-    void *beeTileMem = SpriteManager::instance().allocate(SprBeeTilesLen, beeTileId);
-    memcpy32(beeTileMem, SprBeeTiles, SprBeeTilesLen / 4);
+    m_playerSpriteData = SpriteData(SprPlayerTiles, SprPlayerTilesLen, SprPlayerPal, SprPlayerPalLen);
+    m_playerSpriteData.load();
+    m_beeSpriteData = SpriteData(SprBeeTiles, SprBeeTilesLen, SprBeePal, SprBeePalLen);
+    m_beeSpriteData.load();
 
     // Set up BG0 for an 8bb 30x20t map, using charblock 0 and screenblock 30
     REG_BG0CNT = BG_CBB(0) | BG_SBB(30) | BG_8BPP | BG_REG_32x32;
 
-    obj_set_attr(&obj_buffer[0], ATTR0_SQUARE | ATTR0_8BPP, ATTR1_SIZE_16, ATTR2_ID(playerTileId));
+    obj_set_attr(&obj_buffer[0], ATTR0_SQUARE | ATTR0_8BPP, ATTR1_SIZE_16, ATTR2_ID(m_playerSpriteData.tileId()));
     obj_set_attr(&obj_buffer[1], ATTR0_SQUARE | ATTR0_8BPP | ATTR0_AFF, ATTR1_SIZE_16 | ATTR1_AFF_ID(0),
-                 ATTR2_ID(beeTileId));
+                 ATTR2_ID(m_beeSpriteData.tileId()));
     obj_aff_identity(&obj_aff_buffer[0]);
 }
 
@@ -135,5 +126,6 @@ void GameScene::draw()
 
 void GameScene::unload()
 {
-    SpriteManager::instance().clear();
+    m_beeSpriteData.unload();
+    m_playerSpriteData.unload();
 }
