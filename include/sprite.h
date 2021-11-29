@@ -31,12 +31,12 @@ public:
     void load();
     void unload();
 
-    inline const bool loaded()
+    inline bool loaded() const
     {
         return m_tileId >= 0;
     }
 
-    inline const int tileId()
+    inline int tileId() const
     {
         return m_tileId;
     }
