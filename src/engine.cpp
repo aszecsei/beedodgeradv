@@ -9,6 +9,7 @@ void Engine::init()
 
 void Engine::update()
 {
+    key_poll();
     m_currentScene->update();
 }
 

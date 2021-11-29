@@ -1,7 +1,10 @@
 #include "game_scene.h"
+#include "sprite_manager.h"
+#include <tonc.h>
+
 #include "BgGame.h"
 #include "SprPlayer.h"
-#include <tonc.h>
+#include "SprBee.h"
 
 void GameScene::init()
 {
@@ -18,16 +21,25 @@ void GameScene::init()
     // PLAYER DATA
     // Load Palette
     memcpy16(pal_obj_mem, SprPlayerPal, SprPlayerPalLen / 2);
-    // Load tiles into CBB 4
-    memcpy32(&tile_mem[4], SprPlayerTiles, SprPlayerTilesLen / 4);
+    // Load tiles
+    int playerTileId;
+    void *playerTileMem = SpriteManager::instance().allocate(SprPlayerTilesLen, playerTileId);
+    memcpy32(playerTileMem, SprPlayerTiles, SprPlayerTilesLen / 4);
+
+    // BEE DATA
+    // Load tiles
+    int beeTileId;
+    void *beeTileMem = SpriteManager::instance().allocate(SprBeeTilesLen, beeTileId);
+    memcpy32(beeTileMem, SprBeeTiles, SprBeeTilesLen / 4);
 
     // Set up BG0 for an 8bb 30x20t map, using charblock 0 and screenblock 30
     REG_BG0CNT = BG_CBB(0) | BG_SBB(30) | BG_8BPP | BG_REG_32x32;
 
-    obj_set_attr(obj_buffer, ATTR0_SQUARE | ATTR0_8BPP, ATTR1_SIZE_16, 0 | 0);
+    obj_set_attr(&obj_buffer[0], ATTR0_SQUARE | ATTR0_8BPP, ATTR1_SIZE_16, ATTR2_ID(playerTileId));
+    obj_set_attr(&obj_buffer[1], ATTR0_SQUARE | ATTR0_8BPP, ATTR1_SIZE_16, ATTR2_ID(beeTileId));
 }
 
-void GameScene::bounce_off_screen_edges()
+void GameScene::clamp_to_screen()
 {
     const int GAME_MARGIN = 24;
 
@@ -39,22 +51,18 @@ void GameScene::bounce_off_screen_edges()
     if (m_x <= X_MIN)
     {
         m_x = X_MIN;
-        m_vx *= -1;
     }
     if (m_x >= X_MAX)
     {
         m_x = X_MAX;
-        m_vx *= -1;
     }
     if (m_y <= Y_MIN)
     {
         m_y = Y_MIN;
-        m_vy *= -1;
     }
     if (m_y >= Y_MAX)
     {
         m_y = Y_MAX;
-        m_vy *= -1;
     }
 }
 
@@ -62,13 +70,24 @@ void GameScene::update()
 {
     TiledScene::update();
 
+    m_vx = bit_tribool(key_is_down(-1), KI_RIGHT, KI_LEFT);
+    m_vy = bit_tribool(key_is_down(-1), KI_DOWN, KI_UP);
+
     m_x += m_vx;
     m_y += m_vy;
-    bounce_off_screen_edges();
+
+    clamp_to_screen();
 }
 
 void GameScene::draw()
 {
     TiledScene::draw();
-    obj_set_pos(obj_buffer, m_x, m_y);
+
+    obj_set_pos(&obj_buffer[0], m_x, m_y);
+    obj_set_pos(&obj_buffer[1], 92, 50);
+}
+
+void GameScene::unload()
+{
+    SpriteManager::instance().clear();
 }

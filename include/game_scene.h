@@ -11,7 +11,7 @@ private:
     int m_vx;
     int m_vy;
 
-    void bounce_off_screen_edges();
+    void clamp_to_screen();
 
 public:
     GameScene()
@@ -25,6 +25,7 @@ public:
     void init() override;
     void update() override;
     void draw() override;
+    void unload() override;
 };
 
 #endif // GAME_SCENE_H
