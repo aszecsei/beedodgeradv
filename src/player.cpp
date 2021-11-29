@@ -1,39 +1,5 @@
 #include "player.h"
 
-void Player::clamp_to_screen(bool &hitX, bool &hitY)
-{
-    const int GAME_MARGIN = 24;
-
-    const int X_MIN = 0 - m_margin_left + GAME_MARGIN;
-    const int X_MAX = SCREEN_WIDTH - m_width + m_margin_right - GAME_MARGIN;
-    const int Y_MIN = 0 - m_margin_top + GAME_MARGIN;
-    const int Y_MAX = SCREEN_HEIGHT - m_height + m_margin_bottom - GAME_MARGIN;
-
-    hitX = false;
-    hitY = false;
-
-    if (m_pos.x <= X_MIN)
-    {
-        m_pos.x = X_MIN;
-        hitX = true;
-    }
-    if (m_pos.x >= X_MAX)
-    {
-        m_pos.x = X_MAX;
-        hitX = true;
-    }
-    if (m_pos.y <= Y_MIN)
-    {
-        m_pos.y = Y_MIN;
-        hitY = true;
-    }
-    if (m_pos.y >= Y_MAX)
-    {
-        m_pos.y = Y_MAX;
-        hitY = true;
-    }
-}
-
 void Player::init(OBJ_ATTR *objData, SpriteData *sprite, POINT position)
 {
     m_objData = objData;
@@ -57,5 +23,5 @@ void Player::update()
 
 void Player::draw()
 {
-    obj_set_pos(m_objData, m_pos.x, m_pos.y);
+    Entity::draw();
 }

@@ -1,43 +1,25 @@
 #ifndef BEE_H
 #define BEE_H
 
-#include "sprite.h"
-#include <tonc.h>
+#include "entity.h"
 
-class Bee
+class Bee : public Entity
 {
-private:
-    SpriteData *m_spriteData;
-    POINT m_pos;
-    OBJ_ATTR *m_objData;
-
-    u32 m_width;
-    u32 m_height;
-
-    s32 m_margin_left;
-    s32 m_margin_right;
-    s32 m_margin_top;
-    s32 m_margin_bottom;
-
-    void clamp_to_screen(bool &hitX, bool &hitY);
+protected:
+    POINT m_vel = POINT{0, 0};
 
 public:
     Bee()
-        : m_spriteData(nullptr)
-        , m_pos({0, 0})
-        , m_objData(nullptr)
-        , m_width(16)
-        , m_height(16)
-        , m_margin_left(5)
-        , m_margin_right(5)
-        , m_margin_top(2)
-        , m_margin_bottom(2)
     {
+        m_margin_left = 1;
+        m_margin_right = 1;
+        m_margin_bottom = 3;
+        m_margin_top = 4;
     }
 
-    void init(OBJ_ATTR *objData, SpriteData *sprite, POINT position = {0});
-    void update();
-    void draw();
+    void init(OBJ_ATTR *objData, SpriteData *sprite, POINT position = {0, 0}, POINT velocity = {0, 0});
+    void update() override;
+    void draw() override;
 };
 
 #endif // BEE_H

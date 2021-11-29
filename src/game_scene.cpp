@@ -31,11 +31,11 @@ void GameScene::init()
     m_beeSpriteData.load();
 
     // Set up sprite entities
-    m_player.init(&obj_buffer[0], &m_playerSpriteData, POINT{SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 8});
+    m_player.init(&obj_buffer[0], &m_playerSpriteData, POINT{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2});
 
     for (size_t i = 0; i < BEE_CNT; i++)
     {
-        m_bees[i].init(&obj_buffer[1 + i], &m_beeSpriteData, POINT{60 + (int)i * 20, 30});
+        m_bees[i].init(&obj_buffer[1 + i], &m_beeSpriteData, POINT{60 + (int)i * 20, 30}, POINT{1, 1});
     }
 }
 
